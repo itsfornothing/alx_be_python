@@ -13,7 +13,7 @@ def main():
         choice = int(input("Enter your choice: "))
 
         if choice == 1:
-            add_item = input("Enter item to add: ")
+            add_item = input("Enter the item to add: ")  # Corrected input prompt
             shopping_list.append(add_item)
 
         elif choice == 2:
@@ -24,8 +24,12 @@ def main():
                 print(f"{remove_item} isn't in the list!")
 
         elif choice == 3:
-            for item in shopping_list:
-                print(item)
+            if shopping_list:
+                print("Your Shopping List:")
+                for item in shopping_list:
+                    print(f"- {item}")
+            else:
+                print("The shopping list is empty.")
         elif choice == 4:
             print("Goodbye!")
             break
