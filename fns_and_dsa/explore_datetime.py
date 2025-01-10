@@ -1,13 +1,13 @@
-from datetime import datetime
+import datetime
 
 
 def display_current_datetime():
-    current_date = datetime.now()
+    current_date = datetime.datetime.now()
     print(current_date)
 
 
 def calculate_future_date(days):
-    date = datetime.now()
+    date = datetime.datetime.now()
     today = date.day + days
     month = date.month
     year = date.year
