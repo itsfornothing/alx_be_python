@@ -1,7 +1,7 @@
 def safe_divide(numerator, denominator):
     try:
         if denominator == 0:
-            raise ZeroDivisionError("Division By Zero.")
+            raise ZeroDivisionError("Error: Cannot divide by zero.")
         elif numerator is str and denominator is str:
             raise ValueError
         else:
@@ -9,7 +9,7 @@ def safe_divide(numerator, denominator):
             return f"The result of the division is {float(numerator)/float(denominator)}"
 
     except ZeroDivisionError as e:
-        print(f"Error: Cannot divide by zero.")
+        print(e)
 
     except ValueError as e:
         print("Error: Please enter numeric values only.")
