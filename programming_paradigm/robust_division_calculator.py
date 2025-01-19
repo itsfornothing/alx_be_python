@@ -5,7 +5,8 @@ def safe_divide(numerator, denominator):
         elif numerator is str and denominator is str:
             raise ValueError
         else:
-            return numerator/denominator
+            
+            return float(numerator)/float(denominator)
 
     except ZeroDivisionError as e:
         print(f"Error: Cannot divide by zero.")
