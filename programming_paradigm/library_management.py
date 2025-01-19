@@ -1,33 +1,55 @@
 class Book:
-    def __init__(self, title, author, _is_checked_out):
+    def __init__(self, title, author):
         self.title = title
         self.author = author
-        self._is_checked_out = _is_checked_out
+        self._is_checked_out = False  # Private attribute to track availability
 
     def check_out(self):
-        pass
+        if not self._is_checked_out:
+            self._is_checked_out = True
+            return True
+        return False
 
     def return_book(self):
-        pass
+        if self._is_checked_out:
+            self._is_checked_out = False
+            return True
+        return False
+
+    def is_available(self):
+        return not self._is_checked_out
 
 
 class Library:
     def __init__(self):
-        self._books = []
+        self._books = []  # Private list to store Book instances
 
-    def add_book(self, title, author):
-        self._books.append(title + " by " + author)
-        Book(title, author, True)
+    def add_book(self, book):
+        if isinstance(book, Book):
+            self._books.append(book)
+        else:
+            raise ValueError("Only instances of Book can be added to the library.")
 
     def check_out_book(self, title):
-        if title in self._books:
-            return True
-        else:
-            return False
+        for book in self._books:
+            if book.title == title and book.is_available():
+                book.check_out()
+                print(f"'{title}' has been checked out.")
+                return
+        print(f"'{title}' is not available for checkout.")
 
     def return_book(self, title):
-        pass
+        for book in self._books:
+            if book.title == title and not book.is_available():
+                book.return_book()
+                print(f"'{title}' has been returned.")
+                return
+        print(f"'{title}' was not checked out.")
 
     def list_available_books(self):
-        for book in self._books:
-            print(book)
+        available_books = [book for book in self._books if book.is_available()]
+        if available_books:
+            for book in available_books:
+                print(f"{book.title} by {book.author}")
+        else:
+            print("No books are currently available.")
